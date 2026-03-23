@@ -1,0 +1,5 @@
+100 -200
+
+overworld house 300 120
+
+nether festung 405 188

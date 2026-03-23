@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+	padding-top: 50px;
+}
+
+.interactable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-section {
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-divider {
+    width: 1px;
+    height: 40px;
+    background-color: #333;
+}
+
+.menu-text {
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 1.9rem;
+	text-decoration: none;
+}
+
+.burger {
+  position:absolute;
+  left:50px;
+  top:24px;
+  height:53px;
+  width:66px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.burger span {
+  height:4px;
+  background:black;
+  display:block;
+}
+
+.logo-img {
+    height: 50px;
+}
+
+.dice-icon {
+    width: 60px;   /* Slightly larger than the search icon to account for the square shape */
+    height: 60px;
+    display: block;
+    color: #000;    /* Controls the stroke color */
+}
+
+.dice-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Keeps it aligned to the inner divider */
+    padding-left: 40px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.menu-wrap:hover .menu-text {
+    color: #B70000;
+}
+
+.logo-wrap:hover .logo-img {
+    filter: invert(12%) sepia(95%) saturate(5451%) hue-rotate(353deg) brightness(86%) contrast(116%);
+}
+
+.dice-wrap:hover .dice-icon {
+    transform: rotate(15deg);
+    color: #B70000;
+    /* stroke: #B70000; (Use this if the dice outline doesn't change) */
+}
+
+.interactable:hover {
+    transform: translateY(-2px);
+}
+
+#grafik {
+	height: 1600px;
+	margin-top: 200px;
+}
+
+/* Hide default scrollbar for all browsers */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* The invisible area the scrollbar lives in */
+#custom-scrollbar-container {
+    position: fixed;
+    right: 0;           /* Flush to the right edge */
+    top: 0;             /* Flush to the top edge */
+    width: 12px;        /* Thin architectural width */
+    height: 100vh;      /* Full height of the viewport */
+    z-index: 9999;
+    pointer-events: none;
+    background: transparent; /* Keep the track invisible */
+}
+
+/* The Red Bar (The Thumb) */
+#custom-scrollbar-thumb {
+    width: 100%;
+    height: 80px;       /* Fixed height for the red 'block' */
+    background-color: #B70000; /* Your specific red */
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Remove border-radius to keep it sharp/architectural */
+    border-radius: 0; 
+    transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother inertia */
+}
+
+/* --- 3. LAYOUT STRUCTURE --- */
+        .page-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-height: 100vh;       /* Takes up the full screen height */
+			padding: 60px 50px;      /* Ensures it doesn't touch edges on small screens */
+			width: 100%;
+			margin-top: 150px;
+		}
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+
+        /* The container for each section + its vertical line */
+        .section-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* The Category Label (The Gap) */
+        .category-label {
+            padding: 40px 0; /* This creates the visual gap in the line */
+            font-size: 0.75rem;
+            color: #888;
+            text-align: center;
+        }
+
+        /* The Row containing links and the line */
+        .row-content {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            min-height: 80px;
+			position: relative;
+        }
+
+        .left-col, .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+			min-width: max-content;
+        }
+
+        .left-col { text-align: right; }
+        .right-col { text-align: left; }
+
+        /* The Vertical Line Segment */
+        .center-line {
+            width: 1px;
+            background-color: #333;
+            margin: 0 40px;
+            align-self: stretch; /* Stretches to match the height of the links */
+        }
+
+        /* --- 4. TYPOGRAPHY & LINKS --- */
+        a {
+			text-decoration: underline;
+			display: inline-block;
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+			white-space: nowrap;
+			/* Smooth transition for the scale and color */
+			transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+			/* Set the origin so left-aligned text stays left, and right-aligned stays right */
+			transform-origin: inherit;
+			
+        }
+
+        a:hover {
+            color: #B70000;
+			transform: scale(1.05); /* Increases size by 5% */
+			transform: letter-spacing(1.5);
+        }
+		
+				/* Alignment correction for hover scaling */
+		.left-col a {
+			transform-origin: right center; /* Grows outward from the divider */
+		}
+
+		.right-col a {
+			transform-origin: left center; /* Grows outward from the divider */
+		}
+
+        .highlight {
+            color: #a81111;
+        }
+
+        /* Top-most line (before any labels) */
+        .top-line {
+            height: 60px;
+            width: 1px;
+            background-color: #333;
+        }
+		
+		#hover-preview {
+			position: fixed;
+			width: 300px; /* Adjust size to match your mockup */
+			height: 200px;
+			border: 2px solid #B70000; /* Your red color */
+			pointer-events: none; /* Crucial: ensures the image doesn't block the cursor */
+			opacity: 0;
+			z-index: 10000;
+			overflow: hidden;
+			transition: opacity 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#preview-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover; /* Ensures the image fills the red frame nicely */
+		}
+		
+.menu-container a {
+	display: block;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevents scrolling on the menu page */
+}
+
+.menu-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Spacing between the menu items */
+}
+
+.menu-container a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem; /* Matches the minimalist scale */
+    font-weight: 400;
+    letter-spacing: 0.4rem; /* High tracking/letter-spacing for that luxury look */
+    transition: all 0.4s ease;
+    opacity: 0.8; /* Slightly dimmed for a sophisticated feel */
+}
+
+.menu-container a:hover {
+    opacity: 1;
+    color: #B70000; /* Your signature red from the previous design */
+    letter-spacing: 0.5rem; /* Subtle expand effect on hover */
+}
+

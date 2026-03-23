@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+	padding-top: 50px;
+}
+
+.interactable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-section {
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-divider {
+    width: 1px;
+    height: 40px;
+    background-color: #333;
+}
+
+.menu-text {
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 1.9rem;
+	text-decoration: none;
+}
+
+.burger {
+  position:absolute;
+  left:50px;
+  top:24px;
+  height:53px;
+  width:66px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.burger span {
+  height:4px;
+  background:black;
+  display:block;
+}
+
+.logo-img {
+    height: 50px;
+}
+
+.dice-icon {
+    width: 60px;   /* Slightly larger than the search icon to account for the square shape */
+    height: 60px;
+    display: block;
+    color: #000;    /* Controls the stroke color */
+}
+
+.dice-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Keeps it aligned to the inner divider */
+    padding-left: 40px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.menu-wrap:hover .menu-text {
+    color: #B70000;
+}
+
+.logo-wrap:hover .logo-img {
+    filter: invert(12%) sepia(95%) saturate(5451%) hue-rotate(353deg) brightness(86%) contrast(116%);
+}
+
+.dice-wrap:hover .dice-icon {
+    transform: rotate(15deg);
+    color: #B70000;
+    /* stroke: #B70000; (Use this if the dice outline doesn't change) */
+}
+
+.interactable:hover {
+    transform: translateY(-2px);
+}
+
+#grafik {
+	height: 1600px;
+	margin-top: 200px;
+}
+
+/* Hide default scrollbar for all browsers */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* The invisible area the scrollbar lives in */
+#custom-scrollbar-container {
+    position: fixed;
+    right: 0;           /* Flush to the right edge */
+    top: 0;             /* Flush to the top edge */
+    width: 12px;        /* Thin architectural width */
+    height: 100vh;      /* Full height of the viewport */
+    z-index: 9999;
+    pointer-events: none;
+    background: transparent; /* Keep the track invisible */
+}
+
+/* The Red Bar (The Thumb) */
+#custom-scrollbar-thumb {
+    width: 100%;
+    height: 80px;       /* Fixed height for the red 'block' */
+    background-color: #B70000; /* Your specific red */
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* 	border-radius to keep it sharp/architectural */
+    border-radius: 0; 
+    transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother inertia */
+}
+
+/* --- 3. LAYOUT STRUCTURE --- */
+        .page-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-height: 100vh;       /* Takes up the full screen height */
+			width: 100%;
+			padding-top: 50px;
+			margin-top: 150px;
+		}
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+
+        /* The container for each section + its vertical line */
+        .section-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* The Category Label (The Gap) */
+        .category-label {
+            padding: 40px 0; /* This creates the visual gap in the line */
+            font-size: 0.75rem;
+            color: #888;
+            text-align: center;
+        }
+
+        /* The Row containing links and the line */
+        .row-content {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            min-height: 80px;
+			position: relative;
+        }
+
+        .left-col, .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+			min-width: max-content;
+        }
+
+        .left-col { text-align: right; }
+        .right-col { text-align: left; }
+
+        /* The Vertical Line Segment */
+        .center-line {
+            width: 1px;
+            background-color: #333;
+            margin: 0 40px;
+            align-self: stretch; /* Stretches to match the height of the links */
+        }
+
+        /* --- 4. TYPOGRAPHY & LINKS --- */
+        a {
+			text-decoration: underline;
+			display: inline-block;
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+			white-space: nowrap;
+			/* Smooth transition for the scale and color */
+			transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+			/* Set the origin so left-aligned text stays left, and right-aligned stays right */
+			transform-origin: inherit;
+			
+        }
+
+        a:hover {
+            color: #B70000;
+			transform: scale(1.05); /* Increases size by 5% */
+			transform: letter-spacing(1.5);
+        }
+		
+				/* Alignment correction for hover scaling */
+		.left-col a {
+			transform-origin: right center; /* Grows outward from the divider */
+		}
+
+		.right-col a {
+			transform-origin: left center; /* Grows outward from the divider */
+		}
+
+        .highlight {
+            color: #a81111;
+        }
+
+        /* Top-most line (before any labels) */
+        .top-line {
+            height: 60px;
+            width: 1px;
+            background-color: #333;
+        }
+		
+		#hover-preview {
+			position: fixed;
+			width: 300px; /* Adjust size to match your mockup */
+			height: 200px;
+			border: 2px solid #B70000; /* Your red color */
+			pointer-events: none; /* Crucial: ensures the image doesn't block the cursor */
+			opacity: 0;
+			z-index: 10000;
+			overflow: hidden;
+			transition: opacity 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#preview-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover; /* Ensures the image fills the red frame nicely */
+		}
+		
+.context-icon {
+    width: 45px; /* Sized to match your architectural weight */
+    height: 45px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.context-action-wrap:hover .context-icon {
+    transform: rotate(180deg);
+    color: #B70000;
+}
+
+.filter-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.filter-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 600px;
+}
+
+.filter-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* This keeps text dead-center */
+    padding: 10px 30px; 
+    border: 1px solid #333;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden; /* Prevents the X from showing outside the box */
+	text-transform: uppercase;
+}
+
+/* 1. State: The indicator is hidden by default */
+.filter-tag .remove-indicator {
+    font-size: 1.4rem; /* Prominent architectural size */
+    line-height: 1;
+    font-weight: 300;
+    color: #B70000; /* Red, contrasting against the dark text */
+    cursor: pointer;
+    
+    /* The magic is here */
+    opacity: 0; 
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    
+    display: inline-block;
+    margin-top: -2px; /* Optical alignment adjustment */
+}
+
+.filter-tag:hover {
+    border-color: #B70000;
+	cursor: pointer;
+}
+
+/* Slide the text to the left to make room for the X */
+.filter-tag:hover .filter-text {
+    transform: translateX(-10px);
+}
+
+/* Slide the X into the view */
+.filter-tag:hover .remove-indicator {
+    opacity: 1;
+    right: 10px; /* Moves from -20px to 10px */
+}
+
+.filter-text {
+    transition: transform 0.3s ease;
+}
+
+.remove-indicator {
+    position: absolute;
+    right: -20px; /* Start outside the box on the right */
+    opacity: 0;
+    color: #B70000;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.add-filter-btn {
+    display: inline-flex;
+    flex-direction: row-reverse; 
+    align-items: center;
+    height: 42px; /* Adjusted to match standard filter tag height */
+    min-width: 42px;
+    border: 1px solid #333; /* Matching your .filter-tag border */
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px; /* Matching your body letter-spacing */
+	font-size: 1rem;
+}
+
+.icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.hover-text {
+    max-width: 0;
+    opacity: 0;
+    white-space: nowrap;
+    
+    /* SYNCED SIZES */
+    color: #1a1a1a;
+    text-transform: uppercase;
+    
+    transition: max-width 0.4s ease, opacity 0.1s ease, padding 0.4s ease;
+}
+
+/* Hover State */
+.add-filter-btn:hover {
+    background: rgb(207, 255, 253);
+}
+
+.add-filter-btn:hover .hover-text {
+    max-width: 250px; 
+    opacity: 1;
+    padding-left: 20px;
+}
+
+.add-filter-btn:hover .icon {
+    transform: rotate(90deg);
+}
+
+.portfolio-grid {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: flex-start;
+}
+
+.portfolio-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.col-small { flex: 1; }
+.col-large { flex: 1.5; } /* Makes the middle column wider */
+
+.portfolio-img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+    border: 1px solid transparent;
+}
+
+.portfolio-img:hover {
+    filter: grayscale(0%);
+    border-color: #B70000;
+}
+
+.portfolio-img {
+  /* ... deine bestehenden Regeln ... */
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.portfolio-img[style*="display: none"] {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Subtle white tint */
+    backdrop-filter: blur(12px);         /* High-end architectural blur */
+    z-index: 2000;
+    display: none; 
+    align-items: center;            
+    justify-content: center;       
+}
+
+.modal-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    width: 800px;            /* Hugs the content width */
+	height: 800px;
+	border-radius: 100%;
+    padding: 40px 80px 60px 80px;  /* More padding at bottom, less at top */
+    box-shadow: 0 40px 100px rgba(0,0,0,0.08);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This aligns the 'containers' */
+    width: 100%;
+    margin-bottom: 30px;
+    height: 1.5rem; /* Give the header a fixed height for perfect math */
+}
+
+.modal-header h1 {
+    font-size: 1rem;
+    letter-spacing: 5px;
+    margin: 0;
+    color: #999;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1; /* Ensures no extra spacing above/below letters */
+}
+
+.close-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	letter-spacing: 5px;
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0;
+    
+    /* Typography */
+    font-size: 1rem; 
+    font-weight: 200;
+    line-height: 0; /* Forces the 'x' to ignore its font-leading */
+    
+    /* Visual Correction */
+    /* Lowercase 'x' usually needs to be nudged UP slightly to center with Caps */
+    transform: translateY(-2px); 
+    
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-modal:hover {
+    color: #B70000;
+    transform: translateY(-2px) scale(1.1); /* Maintain the Y offset on hover */
+}
+
+.modal-graphic {
+    margin-top: 100px !important;
+	margin-left: 44px !important;
+    padding: 0 !important;
+}
+
